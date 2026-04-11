@@ -644,7 +644,7 @@ async function confirmPayment(){
 function showReceipt(sale){
   const dt=new Date(sale.data).toLocaleString('pt-BR');
   const pn={dinheiro:'Dinheiro',debito:'Cartão Débito',credito:'Cartão Crédito',pix:'PIX'};
-  let h=`<div class="receipt"><div class="rh"><strong>${esc(CFG.name)}</strong><br>Venda #${String(sale.numero||sale.id?.slice(-4)||'?').padStart(4,'0')}<br>${dt}</div><div class="rd"></div>`;
+  let h=`<div class="receipt"><div class="rh"><strong>${esc(CFG.name)}</strong><br>Venda #${String(sale.numero||String(sale.id||'').slice(-4)||'?').padStart(4,'0')}<br>${dt}</div><div class="rd"></div>`;
   sale.itens.forEach(ci=>{h+=`<div class="rr"><span>${esc(ci.nome)} x${ci.qty}</span><span>R$ ${(ci.preco*ci.qty).toFixed(2)}</span></div>`;});
   h+=`<div class="rd"></div><div class="rr"><span>Subtotal</span><span>R$ ${sale.subtotal.toFixed(2)}</span></div>`;
   if(sale.desconto>0)h+=`<div class="rr"><span>Desconto</span><span>- R$ ${sale.desconto.toFixed(2)}</span></div>`;
@@ -734,7 +734,7 @@ function renderSales(){
       <td><button class="btn-sec" style="font-size:12px;padding:4px 10px" onclick='viewSale(${JSON.stringify(s)})'>Ver</button></td></tr>`;
   }).join('');
 }
-function viewSale(s){let ia=[];try{ia=JSON.parse(s.itens||'[]');}catch(e){}showReceipt({...s,itens:ia,numero:s.id?.slice(-4)||'????'});}
+function viewSale(s){let ia=[];try{ia=JSON.parse(s.itens||'[]');}catch(e){}showReceipt({...s,itens:ia,numero:String(s.id||'').slice(-4)||'????'});}
 function updateSalesStats(){
   const today=new Date().toISOString().split('T')[0];
   const ts=sales.filter(s=>s.data.startsWith(today));
@@ -814,14 +814,14 @@ function saveConfig(){
   localStorage.setItem('tToken',document.getElementById('cfg-token').value.trim());
   localStorage.setItem('tDevice',document.getElementById('cfg-device').value.trim());
   closeConfig();toast('Configuração salva!','success');loadData();loadSales();
-}                              
+}
 
 /* UTILS */
-              function fmt(v){
+function fmt(v){
   return 'R$ ' + Number(v).toFixed(2)
     .replace('.', ',')
-    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');            
-}                                                         
+    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function setStatus(s){document.getElementById('sdot').className='status-dot '+s;}
 function clearForm(){['f-codigo','f-nome','f-categoria','f-quantidade','f-preco','f-minimo'].forEach(id=>document.getElementById(id).value='');}
