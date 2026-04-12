@@ -207,23 +207,68 @@ label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5p
 .pay-status{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;text-align:center;margin-bottom:7px}
 .pay-amount{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:500;color:var(--accent);text-align:center;margin-bottom:5px}
 .pay-sub{font-size:13px;color:var(--text2);text-align:center}
-.pay-tb{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--text2);margin:8px auto;display:block;width:fit-content}
-.receipt{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7}
-.rh{text-align:center;margin-bottom:10px;font-weight:500}
-.rd{border-top:1px dashed var(--border);margin:7px 0}
-.rr{display:flex;justify-content:space-between}
-.rr.rt{font-weight:600;font-size:14px}
-.rf{text-align:center;font-size:11px;color:var(--text3);margin-top:10px}
+.pay-tb{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--text2);width:fit-content;margin:6px auto;display:block}
+
+/* ── COMPROVANTE FISCAL ── */
+.receipt{font-family:'Courier New',Courier,monospace;font-size:11px;line-height:1.55;color:#000;width:100%;max-width:302px;margin:0 auto}
+.r-empresa{text-align:center;margin-bottom:4px}
+.r-fantasia{font-size:13px;font-weight:700;text-decoration:underline;text-transform:uppercase;display:block}
+.r-razao{font-size:10px;display:block;margin-top:1px}
+.r-end{font-size:10px;display:block}
+.r-tel{font-size:10px;display:block}
+.r-cnpj{display:flex;justify-content:space-between;font-size:10px;margin:3px 0}
+.r-sep{border:none;border-top:1px solid #000;margin:4px 0}
+.r-sep.dashed{border-top:1px dashed #000}
+.r-cliente{font-size:10px;margin:3px 0}
+.r-numrow{display:flex;justify-content:space-between;align-items:baseline;margin:4px 0 6px}
+.r-numrow .r-dt{font-size:10px}
+.r-numrow .r-num{font-size:13px;font-weight:700;text-align:right}
+.r-num-lbl{font-size:9px;font-weight:400;display:block}
+.r-tbl{width:100%;border-collapse:collapse;font-size:10px;margin:4px 0}
+.r-tbl th{font-weight:700;text-align:left;padding:1px 0;border-bottom:1px solid #000;font-size:10px}
+.r-tbl th:last-child,.r-tbl td:last-child{text-align:right}
+.r-tbl td{padding:1px 0;vertical-align:top}
+.r-sub{font-size:9px;color:#333}
+.r-totais{margin:6px 0}
+.r-tot-row{display:flex;justify-content:space-between;font-size:11px;padding:1px 0}
+.r-tot-row.big{font-size:13px;font-weight:700;border-top:1px solid #000;padding-top:3px;margin-top:2px}
+.r-pgto-tbl{width:100%;border-collapse:collapse;font-size:10px;margin:4px 0}
+.r-pgto-tbl th{font-weight:700;padding:1px 0;font-size:10px;text-align:left;border-bottom:1px solid #000}
+.r-pgto-tbl td{padding:1px 0;font-size:10px}
+.r-pgto-tbl td:last-child{text-align:right}
+.r-vendedor{font-size:10px;margin:4px 0}
+.r-assin{margin:10px 0 4px}
+.r-assin-line{border-top:1px solid #000;margin-top:28px}
+.r-assin-txt{font-size:9px;text-align:center;margin-top:2px}
+.r-rodape{text-align:center;font-size:10px;font-weight:700;margin-top:6px;border-top:1px solid #000;padding-top:4px}
+.r-obs{font-size:9px;line-height:1.4;margin:4px 0;text-align:justify}
+
+/* ── CONFIG ── */
 .cfg-section{margin-bottom:18px}
 .cfg-section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border)}
 .cfg-row{margin-bottom:10px}
 .cfg-row label{font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:4px}
+
+/* ── TOAST / SPINNER ── */
 #toast{position:fixed;bottom:18px;right:18px;background:var(--text);color:#fff;padding:10px 16px;border-radius:var(--rs);font-size:14px;font-weight:500;z-index:400;transform:translateY(80px);opacity:0;transition:all .25s;max-width:280px}
 #toast.show{transform:translateY(0);opacity:1}
 #toast.success{background:var(--accent)}
 #toast.error{background:var(--red)}
 .spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:5px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── IMPRESSÃO 80mm ── */
+@media print{
+  @page{size:80mm auto;margin:4mm 3mm}
+  body *{visibility:hidden !important}
+  #print-area,#print-area *{visibility:visible !important}
+  #print-area{position:fixed;top:0;left:0;width:74mm;font-family:'Courier New',Courier,monospace;font-size:10pt;color:#000;background:#fff}
+  .receipt{max-width:100%;font-size:10pt}
+  .r-fantasia{font-size:12pt}
+  .r-numrow .r-num{font-size:12pt}
+  .r-tot-row.big{font-size:12pt}
+}
+
 @media(max-width:780px){
   .pdv-layout{grid-template-columns:1fr;height:auto}
   .pdv-left{height:52vh}
@@ -399,7 +444,15 @@ label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5p
     <div class="pay-amount" id="pay-amount">R$ 0,00</div>
     <div id="pay-tb-info"></div>
     <div class="pay-sub" id="pay-sub">Confirme quando o pagamento for recebido.</div>
-    <div class="modal-actions" id="pay-actions" style="justify-content:center;margin-top:18px">
+    <!-- Campo troco (dinheiro) -->
+    <div id="pay-troco-wrap" style="display:none;margin:12px 0;text-align:center">
+      <div style="font-size:12px;color:var(--text2);margin-bottom:6px">Valor recebido (R$)</div>
+      <input type="number" id="pay-recebido" step="0.50" min="0"
+        style="width:150px;text-align:center;font-size:20px;font-weight:600;border:2px solid var(--accent);border-radius:var(--rs);padding:8px;background:var(--surface)"
+        oninput="calcTroco()">
+      <div style="font-size:14px;font-weight:600;margin-top:8px;color:var(--accent);min-height:20px" id="pay-troco-txt"></div>
+    </div>
+    <div class="modal-actions" style="justify-content:center;margin-top:18px">
       <button class="btn-sec" onclick="cancelPayment()">Cancelar</button>
       <button class="btn-primary" id="btn-confirm-pay" onclick="confirmPayment()">✓ Confirmar</button>
     </div>
@@ -408,11 +461,13 @@ label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5p
 
 <!-- RECEIPT MODAL -->
 <div class="mo" id="receipt-modal">
-  <div class="modal" style="max-width:370px">
-    <h2>Venda Concluída ✓</h2>
-    <div class="receipt" id="receipt-content"></div>
+  <div class="modal" style="max-width:360px">
+    <h2 style="margin-bottom:12px">Venda Concluída ✓</h2>
+    <div style="background:#f8f8f6;border:1px solid var(--border);border-radius:var(--rs);padding:14px;max-height:55vh;overflow-y:auto">
+      <div id="receipt-content"></div>
+    </div>
     <div class="modal-actions">
-      <button class="btn-sec" onclick="window.print()">🖨 Imprimir</button>
+      <button class="btn-sec" onclick="printReceipt()">🖨 Imprimir</button>
       <button class="btn-primary" onclick="closeReceipt()">Nova Venda</button>
     </div>
   </div>
@@ -420,11 +475,19 @@ label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5p
 
 <!-- CONFIG MODAL -->
 <div class="mo" id="config-modal">
-  <div class="modal" style="max-width:510px;max-height:85vh;overflow-y:auto">
+  <div class="modal" style="max-width:520px;max-height:88vh;overflow-y:auto">
     <h2>⚙ Configurações</h2>
     <div class="cfg-section">
-      <div class="cfg-section-title">Dados do Mercado</div>
-      <div class="cfg-row"><label>Nome do Mercado</label><input type="text" id="cfg-name" placeholder="Meu Mercado"></div>
+      <div class="cfg-section-title">Dados do Mercado / Empresa</div>
+      <div class="cfg-row"><label>Nome de Fantasia</label><input type="text" id="cfg-name" placeholder="Meu Mercado"></div>
+      <div class="cfg-row"><label>Razão Social</label><input type="text" id="cfg-razao" placeholder="Mercado Silva Ltda-ME"></div>
+      <div class="cfg-row"><label>Endereço completo</label><input type="text" id="cfg-end" placeholder="Rua das Flores, 10 - Centro - Cidade/UF"></div>
+      <div class="cfg-row"><label>Telefone</label><input type="text" id="cfg-tel" placeholder="(51) 99999-9999"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="cfg-row" style="margin:0"><label>CNPJ</label><input type="text" id="cfg-cnpj" placeholder="00.000.000/0001-00"></div>
+        <div class="cfg-row" style="margin:0"><label>IE</label><input type="text" id="cfg-ie" placeholder="000.000.000"></div>
+      </div>
+      <div class="cfg-row" style="margin-top:10px"><label>Nome do Operador / Vendedor</label><input type="text" id="cfg-vendedor" placeholder="Vendedor 1"></div>
       <div class="cfg-row"><label>URL do Google Apps Script *</label><input type="text" id="cfg-url" placeholder="https://script.google.com/macros/s/.../exec"></div>
     </div>
     <div class="cfg-section">
@@ -452,6 +515,9 @@ label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5p
   </div>
 </div>
 
+<!-- ÁREA DE IMPRESSÃO (invisível na tela, imprime pelo @media print) -->
+<div id="print-area" style="display:none"></div>
+
 <div id="toast"></div>
 
 <script>
@@ -460,11 +526,17 @@ let scanRunning=false,codeReader=null,lastCode='',scanTarget='pdv',currentSale=n
 let orderCount=parseInt(localStorage.getItem('orderCount')||'1');
 
 const CFG={
-  get url(){return localStorage.getItem('appsUrl')||''},
-  get name(){return localStorage.getItem('mktName')||'Meu Mercado'},
-  get terminal(){return localStorage.getItem('terminal')||''},
-  get token(){return localStorage.getItem('tToken')||''},
-  get device(){return localStorage.getItem('tDevice')||''}
+  get url()      { return localStorage.getItem('appsUrl')||'' },
+  get name()     { return localStorage.getItem('mktName')||'Meu Mercado' },
+  get razao()    { return localStorage.getItem('mktRazao')||'' },
+  get end()      { return localStorage.getItem('mktEnd')||'' },
+  get tel()      { return localStorage.getItem('mktTel')||'' },
+  get cnpj()     { return localStorage.getItem('mktCNPJ')||'' },
+  get ie()       { return localStorage.getItem('mktIE')||'' },
+  get vendedor() { return localStorage.getItem('mktVendedor')||'OPERADOR' },
+  get terminal() { return localStorage.getItem('terminal')||'' },
+  get token()    { return localStorage.getItem('tToken')||'' },
+  get device()   { return localStorage.getItem('tDevice')||'' }
 };
 
 window.addEventListener('DOMContentLoaded',()=>{
@@ -511,7 +583,7 @@ async function loadSales(){
   }catch(e){}
 }
 
-/* CART */
+/* ── CART ── */
 function addToCart(codigo){
   const it=items.find(i=>String(i.codigo)===String(codigo));
   if(!it)return;
@@ -556,7 +628,7 @@ function recalc(){
   btn.textContent=`Cobrar ${fmt(total)}`;
 }
 
-/* PRODUCTS GRID */
+/* ── PRODUCTS GRID ── */
 function renderProducts(){
   const q=document.getElementById('pdv-search').value.toLowerCase();
   const el=document.getElementById('pdv-products');
@@ -581,7 +653,7 @@ function pdvKey(e){
   }
 }
 
-/* PAYMENT */
+/* ── PAYMENT ── */
 function selectPay(btn){
   document.querySelectorAll('.pay-btn').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');payMethod=btn.dataset.method;
@@ -592,14 +664,30 @@ async function checkout(){
   const sub=cart.reduce((s,ci)=>s+ci.preco*ci.qty,0);
   const disc=Math.max(0,Math.min(sub,parseFloat(document.getElementById('discount').value)||0));
   const total=sub-disc;
-  currentSale={id:Date.now().toString(),data:new Date().toISOString(),itens:JSON.parse(JSON.stringify(cart)),subtotal:sub,desconto:disc,total,pagamento:payMethod,parcelas:payMethod==='credito'?parseInt(document.getElementById('installments').value):1,numero:orderCount};
+  currentSale={id:Date.now().toString(),data:new Date().toISOString(),itens:JSON.parse(JSON.stringify(cart)),subtotal:sub,desconto:disc,total,pagamento:payMethod,parcelas:payMethod==='credito'?parseInt(document.getElementById('installments').value):1,numero:orderCount,recebido:total};
   if(CFG.terminal&&CFG.token&&CFG.device){await sendToTerminal(currentSale);}
   else{showPayModal(total,false);}
 }
+
+function calcTroco(){
+  if(!currentSale)return;
+  const rec=parseFloat(document.getElementById('pay-recebido').value)||0;
+  const troco=Math.max(0,rec-currentSale.total);
+  document.getElementById('pay-troco-txt').textContent=rec>0?`Troco: R$ ${troco.toFixed(2).replace('.',',')} `:'';
+  currentSale.recebido=rec;
+}
+
 function showPayModal(total,hasTerm){
   document.getElementById('pay-modal').classList.add('open');
   document.getElementById('pay-amount').textContent=fmt(total);
   const icons={dinheiro:'💵',debito:'💳',credito:'💳',pix:'⚡'};
+  const trocoWrap=document.getElementById('pay-troco-wrap');
+  trocoWrap.style.display=(!hasTerm&&payMethod==='dinheiro')?'block':'none';
+  if(!hasTerm&&payMethod==='dinheiro'){
+    document.getElementById('pay-recebido').value=total.toFixed(2);
+    document.getElementById('pay-troco-txt').textContent='';
+    if(currentSale)currentSale.recebido=total;
+  }
   if(hasTerm){
     document.getElementById('pay-anim').textContent='📡';
     document.getElementById('pay-status').textContent='Enviado para a maquininha';
@@ -608,7 +696,7 @@ function showPayModal(total,hasTerm){
   }else{
     document.getElementById('pay-anim').textContent=icons[payMethod]||'💳';
     document.getElementById('pay-status').textContent='Aguardando pagamento';
-    const subs={dinheiro:'Receba o dinheiro do cliente.',pix:'Aguarde a confirmação do PIX.',debito:'Passe o cartão na maquininha.',credito:'Passe o cartão na maquininha.'};
+    const subs={dinheiro:'Informe o valor recebido e confirme.',pix:'Aguarde a confirmação do PIX.',debito:'Passe o cartão na maquininha.',credito:'Passe o cartão na maquininha.'};
     document.getElementById('pay-sub').textContent=subs[payMethod]||'Confirme quando receber.';
     document.getElementById('pay-tb-info').innerHTML='';
   }
@@ -641,20 +729,104 @@ async function confirmPayment(){
     updateSalesStats();showReceipt(currentSale);toast('Venda registrada! ✓','success');
   }else{toast('Erro ao salvar venda. Verifique a planilha.','error');}
 }
+
+/* ── RECEIPT ── */
+function buildReceiptHTML(sale){
+  const dt=new Date(sale.data);
+  const dtStr=dt.toLocaleDateString('pt-BR')+' '+dt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  const pn={dinheiro:'DINHEIRO',debito:'CARTÃO DÉBITO',credito:'CARTÃO CRÉDITO',pix:'PIX'};
+  const num=String(sale.numero||String(sale.id||'').slice(-4)||'1').padStart(6,'0');
+
+  let h=`<div class="receipt">`;
+
+  /* cabeçalho */
+  h+=`<div class="r-empresa">
+    <span class="r-fantasia">${esc(CFG.name)}</span>`;
+  if(CFG.razao) h+=`<span class="r-razao">${esc(CFG.razao)}</span>`;
+  if(CFG.end)   h+=`<span class="r-end">${esc(CFG.end)}</span>`;
+  if(CFG.tel)   h+=`<span class="r-tel">${esc(CFG.tel)}</span>`;
+  h+=`</div>`;
+  if(CFG.cnpj||CFG.ie){
+    h+=`<div class="r-cnpj">`;
+    h+=CFG.cnpj?`<span>CNPJ : ${esc(CFG.cnpj)}</span>`:'<span></span>';
+    h+=CFG.ie?`<span>IE : ${esc(CFG.ie)}</span>`:'';
+    h+=`</div>`;
+  }
+  h+=`<hr class="r-sep">`;
+  h+=`<div class="r-cliente">CLIENTE : CONSUMIDOR FINAL</div>`;
+  h+=`<hr class="r-sep dashed">`;
+
+  /* número e data */
+  h+=`<div class="r-numrow">
+    <span class="r-dt">${dtStr}</span>
+    <span class="r-num"><span class="r-num-lbl">COMPROVANTE DE VENDA</span>N° ${num}</span>
+  </div>`;
+  h+=`<hr class="r-sep">`;
+
+  /* tabela de itens */
+  h+=`<table class="r-tbl"><thead><tr>
+    <th style="width:18%">CÓDIGO</th>
+    <th>DESCRIÇÃO<br>QTD x UNIT</th>
+    <th style="width:22%">R$ VALOR</th>
+  </tr></thead><tbody>`;
+  sale.itens.forEach(ci=>{
+    h+=`<tr>
+      <td style="vertical-align:top">${esc(String(ci.codigo||''))}</td>
+      <td>${esc(ci.nome)}<br><span class="r-sub">${ci.qty} x ${parseFloat(ci.preco).toFixed(2)}</span></td>
+      <td style="text-align:right">${(parseFloat(ci.preco)*ci.qty).toFixed(2)}</td>
+    </tr>`;
+  });
+  h+=`</tbody></table><hr class="r-sep">`;
+
+  /* totais */
+  h+=`<div class="r-totais">
+    <div class="r-tot-row big"><span>Total da Nota R$</span><span>${sale.total.toFixed(2)}</span></div>`;
+  if(sale.pagamento==='dinheiro'){
+    const rec=parseFloat(sale.recebido)||sale.total;
+    const troco=Math.max(0,rec-sale.total);
+    h+=`<div class="r-tot-row"><span>Valor Recebido R$</span><span>${rec.toFixed(2)}</span></div>`;
+    h+=`<div class="r-tot-row"><span>Troco R$</span><span>${troco.toFixed(2)}</span></div>`;
+  }
+  h+=`</div>`;
+
+  /* forma de pgto */
+  h+=`<hr class="r-sep dashed">`;
+  h+=`<div style="font-size:10px;font-weight:700;margin-bottom:3px">FORMA DE PGTO. : ${(sale.parcelas||1)>1?'A PRAZO':'À VISTA'}</div>`;
+  h+=`<table class="r-pgto-tbl"><thead><tr><th>DATA PGTO</th><th>R$ VALOR</th><th>TIPO PGTO</th></tr></thead>
+  <tbody><tr>
+    <td>${dt.toLocaleDateString('pt-BR')}</td>
+    <td>${sale.total.toFixed(2)}</td>
+    <td style="text-align:right">${pn[sale.pagamento]||sale.pagamento.toUpperCase()}</td>
+  </tr></tbody></table>`;
+  h+=`<hr class="r-sep dashed">`;
+
+  /* vendedor */
+  h+=`<div class="r-vendedor">VENDEDOR(A) : ${esc(CFG.vendedor)}</div>`;
+  h+=`<hr class="r-sep dashed">`;
+
+  /* obs e assinatura */
+  h+=`<div class="r-obs">Recebi a(s) mercadoria(s) acima descrita(s), concordando plenamente com os prazos e condições de garantia.</div>`;
+  h+=`<div class="r-assin"><div class="r-assin-line"></div><div class="r-assin-txt">ASSINATURA DO CLIENTE</div></div>`;
+  h+=`<hr class="r-sep">`;
+  h+=`<div class="r-rodape">* OBRIGADO E VOLTE SEMPRE *</div>`;
+  h+=`</div>`;
+  return h;
+}
+
 function showReceipt(sale){
-  const dt=new Date(sale.data).toLocaleString('pt-BR');
-  const pn={dinheiro:'Dinheiro',debito:'Cartão Débito',credito:'Cartão Crédito',pix:'PIX'};
-  let h=`<div class="receipt"><div class="rh"><strong>${esc(CFG.name)}</strong><br>Venda #${String(sale.numero||String(sale.id||'').slice(-4)||'?').padStart(4,'0')}<br>${dt}</div><div class="rd"></div>`;
-  sale.itens.forEach(ci=>{h+=`<div class="rr"><span>${esc(ci.nome)} x${ci.qty}</span><span>R$ ${(ci.preco*ci.qty).toFixed(2)}</span></div>`;});
-  h+=`<div class="rd"></div><div class="rr"><span>Subtotal</span><span>R$ ${sale.subtotal.toFixed(2)}</span></div>`;
-  if(sale.desconto>0)h+=`<div class="rr"><span>Desconto</span><span>- R$ ${sale.desconto.toFixed(2)}</span></div>`;
-  h+=`<div class="rd"></div><div class="rr rt"><span>TOTAL</span><span>R$ ${sale.total.toFixed(2)}</span></div><div class="rd"></div><div class="rr"><span>Pagamento</span><span>${pn[sale.pagamento]||sale.pagamento}</span></div><div class="rf">Obrigado pela preferência!</div></div>`;
-  document.getElementById('receipt-content').innerHTML=h;
+  const html=buildReceiptHTML(sale);
+  document.getElementById('receipt-content').innerHTML=html;
+  document.getElementById('print-area').innerHTML=html;
   document.getElementById('receipt-modal').classList.add('open');
+}
+function printReceipt(){
+  document.getElementById('print-area').style.display='block';
+  window.print();
+  setTimeout(()=>document.getElementById('print-area').style.display='none',1200);
 }
 function closeReceipt(){document.getElementById('receipt-modal').classList.remove('open');clearCart();currentSale=null;}
 
-/* ESTOQUE TABLE */
+/* ── ESTOQUE TABLE ── */
 function renderTable(){
   const q=document.getElementById('est-search').value.toLowerCase();
   const cat=document.getElementById('filter-cat').value;
@@ -700,7 +872,7 @@ async function addItem(){
 async function delItem(codigo,nome){
   if(!confirm(`Remover "${nome}"?`))return;
   const r=await apiFetch({action:'delete',codigo});
-  if(r&&r.success){toast(`Removido.`,'success');loadData();}
+  if(r&&r.success){toast('Removido.','success');loadData();}
 }
 function sortBy(col){if(sortCol===col)sortDir*=-1;else{sortCol=col;sortDir=1;}renderTable();}
 function updateStats(){
@@ -718,7 +890,7 @@ function updateCatFilter(){
 }
 function getStatus(it){const q=parseInt(it.quantidade)||0,m=parseInt(it.minimo)||5;return q<=0?'out':q<=m?'low':'ok';}
 
-/* SALES TABLE */
+/* ── SALES TABLE ── */
 function renderSales(){
   const from=document.getElementById('v-from').value,to=document.getElementById('v-to').value,pay=document.getElementById('v-fpay').value;
   let f=sales.filter(s=>{const d=s.data.split('T')[0];return(!from||d>=from)&&(!to||d<=to)&&(!pay||s.pagamento===pay);});
@@ -734,7 +906,10 @@ function renderSales(){
       <td><button class="btn-sec" style="font-size:12px;padding:4px 10px" onclick='viewSale(${JSON.stringify(s)})'>Ver</button></td></tr>`;
   }).join('');
 }
-function viewSale(s){let ia=[];try{ia=JSON.parse(s.itens||'[]');}catch(e){}showReceipt({...s,itens:ia,numero:String(s.id||'').slice(-4)||'????'});}
+function viewSale(s){
+  let ia=[];try{ia=JSON.parse(s.itens||'[]');}catch(e){}
+  showReceipt({...s,itens:ia,numero:String(s.id||'').slice(-4)||'????'});
+}
 function updateSalesStats(){
   const today=new Date().toISOString().split('T')[0];
   const ts=sales.filter(s=>s.data.startsWith(today));
@@ -746,7 +921,7 @@ function updateSalesStats(){
   document.getElementById('v-mes').textContent=fmt(sales.filter(s=>s.data.startsWith(mon)).reduce((a,s)=>a+(parseFloat(s.total)||0),0));
 }
 
-/* SCANNER */
+/* ── SCANNER ── */
 function openScanner(target){scanTarget=target;lastCode='';document.getElementById('scan-rt').style.display='none';document.getElementById('scanner-modal').classList.add('open');}
 function closeScanner(){stopScanner();document.getElementById('scanner-modal').classList.remove('open');}
 async function startScanner(){
@@ -788,10 +963,16 @@ function applyCode(code){
   }
 }
 
-/* CONFIG */
+/* ── CONFIG ── */
 function openConfig(){
   document.getElementById('cfg-url').value=CFG.url;
   document.getElementById('cfg-name').value=CFG.name;
+  document.getElementById('cfg-razao').value=CFG.razao;
+  document.getElementById('cfg-end').value=CFG.end;
+  document.getElementById('cfg-tel').value=CFG.tel;
+  document.getElementById('cfg-cnpj').value=CFG.cnpj;
+  document.getElementById('cfg-ie').value=CFG.ie;
+  document.getElementById('cfg-vendedor').value=CFG.vendedor;
   document.getElementById('cfg-terminal').value=CFG.terminal;
   document.getElementById('cfg-token').value=CFG.token;
   document.getElementById('cfg-device').value=CFG.device;
@@ -810,17 +991,21 @@ function saveConfig(){
   if(!url){toast('Informe a URL do Apps Script.','error');return;}
   localStorage.setItem('appsUrl',url);
   localStorage.setItem('mktName',document.getElementById('cfg-name').value.trim()||'Meu Mercado');
+  localStorage.setItem('mktRazao',document.getElementById('cfg-razao').value.trim());
+  localStorage.setItem('mktEnd',document.getElementById('cfg-end').value.trim());
+  localStorage.setItem('mktTel',document.getElementById('cfg-tel').value.trim());
+  localStorage.setItem('mktCNPJ',document.getElementById('cfg-cnpj').value.trim());
+  localStorage.setItem('mktIE',document.getElementById('cfg-ie').value.trim());
+  localStorage.setItem('mktVendedor',document.getElementById('cfg-vendedor').value.trim()||'OPERADOR');
   localStorage.setItem('terminal',document.getElementById('cfg-terminal').value);
   localStorage.setItem('tToken',document.getElementById('cfg-token').value.trim());
   localStorage.setItem('tDevice',document.getElementById('cfg-device').value.trim());
   closeConfig();toast('Configuração salva!','success');loadData();loadSales();
 }
 
-/* UTILS */
+/* ── UTILS ── */
 function fmt(v){
-  return 'R$ ' + Number(v).toFixed(2)
-    .replace('.', ',')
-    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return 'R$ '+Number(v).toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
 }
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function setStatus(s){document.getElementById('sdot').className='status-dot '+s;}
