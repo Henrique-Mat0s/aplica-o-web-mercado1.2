@@ -615,9 +615,13 @@ function recalc(){
 
 /* ── PRODUCTS GRID ── */
 function renderProducts(){
-  const q=document.getElementById('pdv-search').value.toLowerCase();
+  const q=document.getElementById('pdv-search').value.toLowerCase().trim();
   const el=document.getElementById('pdv-products');
-  let f=items.filter(it=>!q||it.nome?.toLowerCase().includes(q)||String(it.codigo).includes(q));
+  if(!q){
+    el.innerHTML='<div class="pdv-empty"><div class="icon">🔍</div>Digite o nome ou código do produto para buscar.</div>';
+    return;
+  }
+  let f=items.filter(it=>it.nome?.toLowerCase().includes(q)||String(it.codigo).includes(q));
   if(!f.length){el.innerHTML='<div class="pdv-empty"><div class="icon">📭</div>Nenhum produto encontrado.</div>';return;}
   el.innerHTML=f.map(it=>{
     const qty=parseInt(it.quantidade)||0,oos=qty<=0;
@@ -997,7 +1001,7 @@ function stopScanner(){
 function applyCode(code){
   if(scanTarget==='pdv'){
     const f=items.find(i=>String(i.codigo)===String(code));
-    if(f){addToCart(f.codigo);toast(`${f.nome} adicionado! ✓`,'success');}
+    if(f){addToCart(f.codigo);document.getElementById('pdv-search').value='';renderProducts();toast(`${f.nome} adicionado! ✓`,'success');}
     else{document.getElementById('pdv-search').value=code;renderProducts();toast('Produto não cadastrado.','error');}
   }else{
     document.getElementById('f-codigo').value=code;
