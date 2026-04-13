@@ -41,33 +41,46 @@ header{background:var(--pdv-bg);padding:0 20px;height:52px;display:flex;align-it
 /* PAGES */
 .page{display:none}.page.active{display:block}
 
-/* PDV LAYOUT */
-.pdv-layout{display:grid;grid-template-columns:1fr 380px;height:calc(100vh - 52px);background:var(--pdv-bg)}
-.pdv-left{display:flex;flex-direction:column;background:var(--pdv-bg);border-right:1px solid var(--pdv-border);overflow:hidden}
-.pdv-search-bar{padding:14px;border-bottom:1px solid var(--pdv-border);display:flex;gap:8px}
+/* PDV LAYOUT — painel único */
+.pdv-layout{display:flex;flex-direction:column;height:calc(100vh - 52px);background:var(--bg)}
+.pdv-search-bar{padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:8px;position:relative}
 .pdv-swrap{position:relative;flex:1}
-.pdv-sicon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--pdv-text2);font-size:14px}
-.pdv-swrap input{width:100%;background:var(--pdv-surface);border:1px solid var(--pdv-border);border-radius:var(--rs);color:var(--pdv-text);padding:10px 12px 10px 34px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .15s}
-.pdv-swrap input:focus{border-color:var(--pdv-accent)}
-.pdv-swrap input::placeholder{color:var(--pdv-text2)}
-.btn-scan-pdv{background:var(--pdv-surface);border:1px solid var(--pdv-border);color:var(--pdv-text);border-radius:var(--rs);padding:10px 14px;cursor:pointer;font-size:16px;transition:background .12s}
-.btn-scan-pdv:hover{background:var(--pdv-surface2)}
-.pdv-products{flex:1;overflow-y:auto;padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;align-content:start}
-.pdv-products::-webkit-scrollbar{width:4px}
-.pdv-products::-webkit-scrollbar-thumb{background:var(--pdv-border);border-radius:2px}
-.prod-card{background:var(--pdv-surface);border:1px solid var(--pdv-border);border-radius:var(--r);padding:12px;cursor:pointer;transition:all .12s;user-select:none}
-.prod-card:hover{background:var(--pdv-surface2);border-color:var(--pdv-accent);transform:translateY(-1px)}
-.prod-card:active{transform:scale(.97)}
-.prod-card.oos{opacity:.4;cursor:not-allowed}
-.prod-name{font-size:13px;font-weight:500;color:var(--pdv-text);line-height:1.3;margin-bottom:7px}
-.prod-price{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500;color:var(--pdv-accent)}
-.prod-stock{font-size:11px;color:var(--pdv-text2);margin-top:3px}
-.prod-cat{font-size:10px;color:var(--pdv-text2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
-.pdv-empty{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--pdv-text2);font-size:14px}
-.pdv-empty .icon{font-size:34px;margin-bottom:10px}
+.pdv-sicon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px}
+.pdv-swrap input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);padding:10px 12px 10px 34px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .15s}
+.pdv-swrap input:focus{border-color:var(--accent)}
+.btn-scan-pdv{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:var(--rs);padding:10px 14px;cursor:pointer;font-size:16px;transition:background .12s}
+.btn-scan-pdv:hover{background:var(--border)}
 
-/* ORDER PANEL */
-.pdv-right{display:flex;flex-direction:column;background:var(--surface);overflow:hidden}
+/* Dropdown de resultados */
+.pdv-dropdown{
+  position:absolute;top:100%;left:16px;right:16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 var(--r) var(--r);
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+  z-index:50;
+  max-height:320px;
+  overflow-y:auto;
+  display:none;
+}
+.pdv-dropdown.open{display:block}
+.pdv-dropdown::-webkit-scrollbar{width:4px}
+.pdv-dropdown::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.drop-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s;gap:12px}
+.drop-item:last-child{border-bottom:none}
+.drop-item:hover{background:var(--accent-light)}
+.drop-item.oos{opacity:.45;cursor:not-allowed}
+.drop-item-left{flex:1;min-width:0}
+.drop-item-name{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drop-item-cat{font-size:11px;color:var(--text3);margin-top:1px}
+.drop-item-right{text-align:right;white-space:nowrap}
+.drop-item-price{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:var(--accent)}
+.drop-item-stock{font-size:11px;color:var(--text3);margin-top:1px}
+.drop-empty{padding:20px;text-align:center;color:var(--text3);font-size:13px}
+
+/* ORDER PANEL ocupa tudo */
+.pdv-right{display:flex;flex-direction:column;background:var(--surface);flex:1;overflow:hidden;max-width:480px;margin:16px auto;width:100%;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh)}
 .order-header{padding:14px 18px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .order-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:600}
 .order-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text3)}
@@ -283,18 +296,17 @@ label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5p
 <!-- PDV -->
 <div class="page active" id="page-pdv">
   <div class="pdv-layout">
-    <div class="pdv-left">
-      <div class="pdv-search-bar">
-        <div class="pdv-swrap">
-          <span class="pdv-sicon">🔍</span>
-          <input type="text" id="pdv-search" placeholder="Buscar produto ou digitar código..." oninput="renderProducts()" onkeydown="pdvKey(event)" autocomplete="off">
-        </div>
-        <button class="btn-scan-pdv" onclick="openScanner('pdv')">📷</button>
+    <!-- Barra de busca com dropdown -->
+    <div class="pdv-search-bar" id="pdv-search-bar">
+      <div class="pdv-swrap">
+        <span class="pdv-sicon">🔍</span>
+        <input type="text" id="pdv-search" placeholder="Buscar produto ou digitar código..." oninput="renderProducts()" onkeydown="pdvKey(event)" autocomplete="off">
       </div>
-      <div class="pdv-products" id="pdv-products">
-        <div class="pdv-empty"><div class="icon">🔌</div>Configure a conexão para carregar os produtos.</div>
-      </div>
+      <button class="btn-scan-pdv" onclick="openScanner('pdv')">📷</button>
+      <div class="pdv-dropdown" id="pdv-dropdown"></div>
     </div>
+
+    <!-- Painel do pedido -->
     <div class="pdv-right">
       <div class="order-header">
         <div><div class="order-title">Pedido</div><div class="order-num" id="order-num">#0001</div></div>
@@ -616,29 +628,48 @@ function recalc(){
 /* ── PRODUCTS GRID ── */
 function renderProducts(){
   const q=document.getElementById('pdv-search').value.toLowerCase().trim();
-  const el=document.getElementById('pdv-products');
-  if(!q){
-    el.innerHTML='<div class="pdv-empty"><div class="icon">🔍</div>Digite o nome ou código do produto para buscar.</div>';
-    return;
-  }
+  const dd=document.getElementById('pdv-dropdown');
+  if(!q){dd.classList.remove('open');dd.innerHTML='';return;}
   let f=items.filter(it=>it.nome?.toLowerCase().includes(q)||String(it.codigo).includes(q));
-  if(!f.length){el.innerHTML='<div class="pdv-empty"><div class="icon">📭</div>Nenhum produto encontrado.</div>';return;}
-  el.innerHTML=f.map(it=>{
+  if(!f.length){
+    dd.innerHTML='<div class="drop-empty">Nenhum produto encontrado.</div>';
+    dd.classList.add('open');return;
+  }
+  dd.innerHTML=f.map(it=>{
     const qty=parseInt(it.quantidade)||0,oos=qty<=0;
-    return `<div class="prod-card${oos?' oos':''}" onclick="${oos?'':' addToCart(\''+it.codigo+'\')'}">
-      <div class="prod-cat">${esc(it.categoria||'')}</div>
-      <div class="prod-name">${esc(it.nome)}</div>
-      <div class="prod-price">R$ ${parseFloat(it.preco||0).toFixed(2)}</div>
-      <div class="prod-stock">${oos?'Sem estoque':qty+' em estoque'}</div>
+    return `<div class="drop-item${oos?' oos':''}" onclick="${oos?'':' pickProduct(\''+it.codigo+'\')'}">
+      <div class="drop-item-left">
+        <div class="drop-item-name">${esc(it.nome)}</div>
+        <div class="drop-item-cat">${esc(it.categoria||'')}</div>
+      </div>
+      <div class="drop-item-right">
+        <div class="drop-item-price">R$ ${parseFloat(it.preco||0).toFixed(2)}</div>
+        <div class="drop-item-stock">${oos?'Sem estoque':qty+' em estoque'}</div>
+      </div>
     </div>`;
   }).join('');
+  dd.classList.add('open');
+}
+function pickProduct(codigo){
+  addToCart(codigo);
+  document.getElementById('pdv-search').value='';
+  document.getElementById('pdv-dropdown').classList.remove('open');
 }
 function pdvKey(e){
   if(e.key==='Enter'){
     const q=document.getElementById('pdv-search').value.trim();
     if(!q)return;
     const f=items.find(it=>String(it.codigo)===q);
-    if(f){addToCart(f.codigo);document.getElementById('pdv-search').value='';renderProducts();}
+    if(f){pickProduct(f.codigo);}
+    else if(items.length){
+      // tenta match parcial com Enter
+      const partial=items.filter(it=>it.nome?.toLowerCase().includes(q.toLowerCase()));
+      if(partial.length===1){pickProduct(partial[0].codigo);}
+    }
+  }
+  if(e.key==='Escape'){
+    document.getElementById('pdv-search').value='';
+    document.getElementById('pdv-dropdown').classList.remove('open');
   }
 }
 
@@ -1001,7 +1032,7 @@ function stopScanner(){
 function applyCode(code){
   if(scanTarget==='pdv'){
     const f=items.find(i=>String(i.codigo)===String(code));
-    if(f){addToCart(f.codigo);document.getElementById('pdv-search').value='';renderProducts();toast(`${f.nome} adicionado! ✓`,'success');}
+    if(f){pickProduct(f.codigo);toast(`${f.nome} adicionado! ✓`,'success');}
     else{document.getElementById('pdv-search').value=code;renderProducts();toast('Produto não cadastrado.','error');}
   }else{
     document.getElementById('f-codigo').value=code;
@@ -1061,6 +1092,12 @@ function toast(msg,type=''){const el=document.getElementById('toast');el.textCon
 
 ['scanner-modal','config-modal'].forEach(id=>{
   document.getElementById(id).addEventListener('click',function(e){if(e.target===this){if(id==='scanner-modal')closeScanner();else closeConfig();}});
+});
+document.addEventListener('click',function(e){
+  const bar=document.getElementById('pdv-search-bar');
+  if(bar&&!bar.contains(e.target)){
+    document.getElementById('pdv-dropdown').classList.remove('open');
+  }
 });
 </script>
 </body>
